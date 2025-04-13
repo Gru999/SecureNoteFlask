@@ -1,0 +1,27 @@
+.flashes {
+    list-style: none;
+    padding: 0;
+}
+
+.flashes li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.flashes li.success {
+    background-color: green;
+}
+
+.flashes li.info {
+    background-color: blue;
+}
+
+.flashes li.warning {
+    background-color: orange;
+}
+
+.flashes li.danger {
+    background-color: red;
+}

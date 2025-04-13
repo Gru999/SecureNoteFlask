@@ -1,0 +1,19 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtuel miljø-mappe
+SecureNoteVE/
+venv/
+
+# Miljøvariabler
+.env
+
+# OS-specifikke filer
+.DS_Store
+Thumbs.db
+
+.vscode/
+
+*.pyo
+*.pyd
