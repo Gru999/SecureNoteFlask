@@ -2,21 +2,20 @@
 <html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Deling af Note</title>
+    <title>Vis Note</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <h1>Delbar Note</h1>
+        <h1>Note</h1>
         <a href="{{ url_for('logout') }}" class="btn btn-logout">Log ud</a>
     </header>
     <div class="content-container">
         <p>{{ note.content }}</p>
     </div>
     <div class="actions">
-        <p>Kopier linket for at dele:</p>
-        <input type="text" value="{{ request.url }}" readonly onclick="this.select();" class="share-input" />
-        <a href="{{ url_for('home') }}" class="btn btn-secondary">Tilbage til alle noter</a>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Tilbage</a>
+        <a href="{{ url_for('shared_note', note_id=note.id) }}" class="btn btn-secondary">Del denne note</a>
     </div>
 </body>
 </html>

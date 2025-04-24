@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="da">
 <head>
-    <title>Notes App</title>
+    <meta charset="UTF-8">
+    <title>Mine Noter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul class="flashes">
-                {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-
-    <h1>Notes</h1>
-    <form action="/add" method="post">
-        <textarea name="content" required></textarea>
-        <button type="submit">Add Note</button>
-    </form>
-    <ul>
+    <header>
+        <h1>Mine Noter</h1>
+        <a href="{{ url_for('logout') }}" class="btn btn-logout">Log ud</a>
+    </header>
+    <main>
+        <form action="{{ url_for('add_note') }}" method="POST">
+            <textarea name="content" rows="3" placeholder="Skriv din note her..." class="form-input"></textarea>
+            <br>
+            <button type="submit" class="btn btn-primary">Tilføj Note</button>
+        </form>
+        <ul class="note-list">
         {% for note in notes %}
-            <li>
-                {{ note.content }} 
-                <a href="/delete/{{ note.id }}">Delete</a>
-                <a href="/note?note_id={{ note.id }}">View</a>
-                <a href="{{ url_for('shared_note') }}?note_id={{ note.id }}">Share</a>
+            <li class="note-item">
+                <p>{{ note.content }}</p>
+                <div class="note-actions">
+                  <a href="{{ url_for('view_note', note_id=note.id) }}" class="btn btn-secondary">Vis</a>
+                  <a href="{{ url_for('shared_note', note_id=note.id) }}" class="btn btn-secondary">Del</a>
+                  <a href="{{ url_for('delete_note', note_id=note.id) }}" class="btn btn-danger">Slet</a>
+                </div>
             </li>
         {% endfor %}
-    </ul>
+        </ul>
+    </main>
 </body>
 </html>

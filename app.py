@@ -4,6 +4,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 
+
 load_dotenv()
 
 
@@ -25,7 +26,6 @@ def get_db_connection():
     return mysql.connector.connect(**db_config)
 
 
-
 @app.route("/")
 def home():
     user_id = session.get("user_id")
@@ -39,8 +39,6 @@ def home():
     notes = cursor.fetchall()
     conn.close()
     return render_template("index.html", notes=notes)
-
-
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -63,28 +61,6 @@ def register():
             conn.close()
 
     return render_template("register.html")
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
-        user = cursor.fetchone()
-        conn.close()
-
-        if user and check_password_hash(user["password"], password):
-            session["user_id"] = user["id"]
-            session["username"] = user["username"]
-            flash("Login successful!", "success")
-            return redirect(url_for("home"))
-        else:
-            flash("Invalid username or password.", "danger")
-
-    return render_template("login.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -117,7 +93,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-
 @app.route("/add", methods=["POST"])
 def add_note():
     content = request.form.get("content")
@@ -134,8 +109,6 @@ def add_note():
     return redirect(url_for("home"))
 
 
-
-
 @app.route("/delete/<int:note_id>")
 def delete_note(note_id):
     conn = get_db_connection()
@@ -145,7 +118,6 @@ def delete_note(note_id):
     conn.close()
     flash("Note deleted successfully!", "info")
     return redirect(url_for("home"))
-
 
 
 @app.route("/note")
@@ -186,7 +158,6 @@ def shared_note():
     except Exception as e:
         flash(f'Error: {e}', 'danger')
         return redirect(url_for('home'))
-
 
 
 if __name__ == "__main__":

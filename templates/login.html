@@ -1,7 +1,19 @@
-<h1>Login</h1>
-<form method="post">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
-<a href="{{ url_for('register') }}">Don't have an account? Register here.</a>
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>Log ind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Log ind</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+      <input type="text" name="username" placeholder="Brugernavn" required class="form-input">
+      <input type="password" name="password" placeholder="Kodeord" required class="form-input">
+      <button type="submit" class="btn btn-primary">Log ind</button>
+    </form>
+    <p>Har du ikke en konto? <a href="{{ url_for('register') }}">Opret en</a></p>
+  </div>
+</body>
+</html>
