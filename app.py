@@ -1,29 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
-from dotenv import load_dotenv
+from config import Config
 import os
 
 
-load_dotenv()
-
-
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')
-
-
-# Database connection
-db_config = {
-    "host": os.getenv("DB_HOST"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "database": os.getenv("DB_NAME"),
-    "port": int(os.getenv("DB_PORT", 3306))
-}
+app.secret_key = Config.SECRET_KEY
 
 
 def get_db_connection():
-    return mysql.connector.connect(**db_config)
+    return mysql.connector.connect(**Config.DB_CONFIG)
 
 
 @app.route("/")

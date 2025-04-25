@@ -1,3 +1,9 @@
+import pytest
+from app import app              
+from flask import session        
+from werkzeug.security import generate_password_hash
+
+
 def test_shared_no_id_redirects(client):
     resp = client.get('/shared_note', follow_redirects=True)
     assert b'No note ID provided' in resp.data

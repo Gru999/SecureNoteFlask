@@ -1,3 +1,9 @@
+import pytest
+from app import app              
+from flask import session        
+from werkzeug.security import generate_password_hash
+
+
 def test_home_requires_login(client):
     resp = client.get('/', follow_redirects=False)
     assert resp.status_code == 302

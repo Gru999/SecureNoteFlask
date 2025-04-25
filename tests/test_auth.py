@@ -1,3 +1,9 @@
+import pytest
+from app import app              
+from flask import session        
+from werkzeug.security import generate_password_hash
+
+
 def test_get_register(client):
     resp = client.get('/register')
     assert resp.status_code == 200
